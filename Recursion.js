@@ -108,28 +108,50 @@ function findWayOut( maze, vert =0, horiz =0, path = '') {
     return findWayOut(maze, vert, horiz, path);
   }
 
-  // const up = maze[vert][horiz -1];
-  // if(up && up !== '*') {
-  //   maze[vert][horiz] = '*';
-  //   vert -= 1;
-  //   path =+ 'L';
-  //   return findWayOut(maze, vert, horiz, path);
-  // }
+  const up = maze[vert -1][horiz];
+  if(up && up !== '*') {
+    maze[vert][horiz] = '*';
+    vert -= 1;
+    path += 'U';
+    return findWayOut(maze, vert, horiz, path);
+  }
   
 }
 
 let mySmallMaze = [
-  [' ', ' ', ' '],
+  [' ', '*', 'e'],
   [' ', '*', ' '],
-  [' ', ' ', 'e']
+  [' ', ' ', ' ']
 ];
 
 let bigMaze = [
   [' ', ' ', ' ', '*', ' ', ' ', ' '],
-  ['*', '*', ' ', '*', ' ', '*', ' '],
-  [' ', ' ', ' ', '*', ' ', ' ', ' '],
-  [' ', '*', '*', '*', '*', '*', ' '],
-  [' ', ' ', ' ', ' ', ' ', ' ', 'e']
+  ['*', '*', ' ', ' ', ' ', '*', ' '],
+  [' ', ' ', ' ', ' ', '*', ' ', ' '],
+  [' ', '*', ' ', ' ', '*', '*', ' '],
+  [' ', ' ', '*', '*', ' ', ' ', 'e']
 ];
 
-console.log(findWayOut(bigMaze))
+// console.log(findWayOut(mySmallMaze))
+
+
+//Problem 10
+var allAnagrams = function(string) {
+
+  var uniqueOutput = {};
+
+  (function anagram(ana, str) {
+
+    // could have also written this as: if(!str)....
+    if (str === '') {
+      uniqueOutput[ana] = 1;
+    }
+    //recursive call for the length of the anagram.
+    for (var i = 0; i < str.length; i++) {
+      anagram(ana + str[i], str.slice(0, i) + str.slice(i + 1));
+    }
+  })('', string);
+  return Object.keys(uniqueOutput);
+};
+
+// console.log(allAnagrams('east'));
