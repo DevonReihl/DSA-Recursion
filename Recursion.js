@@ -148,5 +148,89 @@ var allAnagrams = function(string) {
   return Object.keys(uniqueOutput);
 };
 
-// 
+// 11. Organization Chart
+const organization = {
+  Zuckerberg: {
+    Schroepfer: {
+      Bosworth: {
+        Steve: {},
+        Kyle: {},
+        Andra: {},
+      },
+      Zhao: {
+        Richie: {},
+        Sofia: {},
+        Jen: {},
+      },
+      Badros: {
+        John: {},
+        Mike: {},
+        Pat: {},
+      },
+      Parikh: {
+        Zach: {},
+        Ryan: {},
+        Tes: {},
+      },
+    },
+    Schrage: {
+      VanDyck: {
+        Sabrina: {},
+        Michelle: {},
+        Josh: {},
+      },
+      Swain: {
+        Blanch: {},
+        Tom: {},
+        Joe: {},
+      },
+      Frankovsky: {
+        Jasee: {},
+        Brian: {},
+        Margaret: {},
+      },
+    },
+    Sandberg: {
+      Goler: {
+        Eddie: {},
+        Julie: {},
+        Annie: {},
+      },
+      Hernandez: {
+        Rowi: {},
+        Inga: {},
+        Morgan: {},
+      },
+      Moissinac: {
+        Amy: {},
+        Chuck: {},
+        Vinni: {},
+      },
+      Kelley: {
+        Eric: {},
+        Ana: {},
+        Wes: {},
+      },
+    },
+  },
+};
+function printOrganization(array, indent = 0) {
+  for (let key in array) {
+    console.log(" ".repeat(indent), key);
+    printOrganization(array[key], indent + 4);
+  }
+}
+// console.log(printOrganization(organization));
+
+
+// 12. Binary Representation
+function convertToBinary(num) {
+  if (num > 0) {
+    let binary = Math.floor(num % 2);
+    return convertToBinary(Math.floor(num / 2)) + binary;
+  } else {
+    return "";
+  }
+}
+// console.log(convertToBinary(25));
 
