@@ -1,21 +1,33 @@
-function stepsToSolveHanoiT(height, srcP, desP, bufferP) {
-  if (height >= 1) {
-    
-    // Move a tower of height-1 to the buffer peg, using the destination peg.
-    stepsToSolveHanoiT(height - 1, srcP, bufferP, desP);
-    
-    
-    // Move the remaining disk to the destination peg.
-    console.log('Move disk from Tower ', srcP, ' to Tower ', desP);
+let count =0;
 
-    // Move the tower of `height-1` from the `buffer peg` to the `destination peg` using the `source peg`.        
-    stepsToSolveHanoiT(height - 1, bufferP, desP, srcP);
-  }
+function stepsToSolveHanoiT(height, src, dest, buffer) {
+  // if (height >= 1) {
+    
+  //   // Move a tower of height-1 to the buffer peg, using the destination peg.
+  //   stepsToSolveHanoiT(height - 1, srcP, bufferP, desP);
+    
+    
+  //   // Move the remaining disk to the destination peg.
+  //   console.log('Move disk from Tower ', srcP, ' to Tower ', desP);
+
+  //   // Move the tower of `height-1` from the `buffer peg` to the `destination peg` using the `source peg`.        
+  //   stepsToSolveHanoiT(height - 1, bufferP, desP, srcP);
+  // }
   
-  return;
+  // return;
+
+    if( height === 1) {
+      console.log(`Move from ${src} to ${dest}`);
+      count++;
+    } else {
+      stepsToSolveHanoiT( height-1, src, buffer, dest );
+      stepsToSolveHanoiT( 1, src, dest, buffer);
+      stepsToSolveHanoiT( height-1, buffer, dest, src);
+    }
 }
-//O( )
-stepsToSolveHanoiT(3, "A", "C", "B");
+//O(2n)
+stepsToSolveHanoiT(4, "A", "C", "B");
+console.log(count)
 
 
 
@@ -27,13 +39,13 @@ function countSheep (num) {
   }
   return count;
 }
-//O(n)
+//O(n) recursion= O(n)
 // console.log(countSheep(5))
 
 function powerCalculator (int, exp) {
   console.log(Math.pow(int, exp));
 }
-//O
+//O(n) recursion= O(n)
 // powerCalculator(10, 3)
 
 function reverseString(str) {
@@ -50,14 +62,14 @@ function nthTriangleNum(num) {
   }
   return total
 }
-//O(n)
+//O(n) recursion= O(n)
 // console.log(nthTriangleNum(5))
 
 function stringSplitter(str) {
   let split = str.split('/'). join(', ');
   console.log(split);
 }
-//O(n)
+//O(n) recursion= O(n)
 // stringSplitter('10/21/1999')
 
 function fib(num) {
@@ -73,7 +85,7 @@ function fib(num) {
   }
   return b;
 }
-//O(n)
+//O(n) recursion= O(n^2)
 // console.log(fib(7))
 
 function factorial(num) {
