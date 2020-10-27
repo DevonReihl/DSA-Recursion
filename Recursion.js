@@ -80,42 +80,38 @@ function factorial(i) {
 // console.log(factorial(5))
 
 //problem 8 
-function findWayOut( maze, vert =0, horiz =0, path = '') {
-  if (maze[vert][horiz] === 'e') {
-    return `Path to end: ${path}`;
+function findWayOut( maze, x=0, y=0, path = '', paths=[]) {
+  if (x < 0 || y < 0 || x >= maze.length || y >= maze[x].length) {
+    return false;
   }
-
-
-  const right = maze[vert][horiz +1];
-  if(right && right !== '*'){
-    horiz += 1;
-    path += 'R';
-    return findWayOut(maze, vert, horiz, path);
-  }
-
-  const down = maze[vert +1][horiz];
-  if(down && down !== '*'){
-    vert += 1;
-    path += 'D';
-    return findWayOut(maze, vert, horiz, path);
-  }
+  let value = maze[x][y];
   
-  const left = maze[vert][horiz -1];
-  if(left && left !== '*') {
-    maze[vert][horiz] = '*';
-    horiz -= 1;
-    path += 'L';
-    return findWayOut(maze, vert, horiz, path);
+  const newMaze = maze.map((row, index) => {
+    if(index !== x) {
+      return row;
+    }
+    return row.map((value, index) => {
+      if(index !== y) {
+        return value;
+      }
+      return 'v'
+    })
+  })
+
+  if (value === '*' || value === 'v') {
+    return false;
+  }
+  if (value === 'e') {
+    paths.push(path);
+    return paths;
   }
 
-  const up = maze[vert -1][horiz];
-  if(up && up !== '*') {
-    maze[vert][horiz] = '*';
-    vert -= 1;
-    path += 'U';
-    return findWayOut(maze, vert, horiz, path);
-  }
-  
+  let up = findWayOut(newMaze, x-1, y, path+'U', paths);
+  let down = findWayOut(newMaze, x+1, y, path+'D', paths);
+  let left = findWayOut(newMaze, x, y-1, path+'L', paths);
+  let right = findWayOut(newMaze, x, y+1, path+'R', paths);
+
+  return left || right || up || down;
 }
 
 let mySmallMaze = [
@@ -132,7 +128,7 @@ let bigMaze = [
   [' ', ' ', '*', '*', ' ', ' ', 'e']
 ];
 
-// console.log(findWayOut(mySmallMaze))
+console.log(findWayOut(bigMaze))
 
 
 //Problem 10
@@ -152,4 +148,5 @@ var allAnagrams = function(string) {
   return Object.keys(uniqueOutput);
 };
 
-console.log(allAnagrams('dictionary'));
+// 
+
