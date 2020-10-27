@@ -142,11 +142,9 @@ var allAnagrams = function(string) {
 
   (function anagram(ana, str) {
 
-    // could have also written this as: if(!str)....
     if (str === '') {
       uniqueOutput[ana] = 1;
     }
-    //recursive call for the length of the anagram.
     for (var i = 0; i < str.length; i++) {
       anagram(ana + str[i], str.slice(0, i) + str.slice(i + 1));
     }
@@ -154,4 +152,4 @@ var allAnagrams = function(string) {
   return Object.keys(uniqueOutput);
 };
 
-// console.log(allAnagrams('east'));
+console.log(allAnagrams('dictionary'));
